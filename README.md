@@ -52,9 +52,13 @@ only `title` and `startsAt` are required.
 | Doc | What's in it |
 | --- | --- |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | How the pieces fit; data model; dedupe strategy; deploy notes. |
-| [`docs/EVENT_FORMAT.md`](docs/EVENT_FORMAT.md) | The canonical event JSON schema, field by field. |
+| [`docs/EVENT_FORMAT.md`](docs/EVENT_FORMAT.md) | The canonical event JSON, field by field (incl. multi-source). |
+| [`docs/AI_AUTHORING_GUIDE.md`](docs/AI_AUTHORING_GUIDE.md) | Copy-paste prompt + rules for generating events in another AI session. |
 | [`docs/INGESTION.md`](docs/INGESTION.md) | The two ingestion paths and how to use them. |
 | [`docs/SCRAPERS.md`](docs/SCRAPERS.md) | Plan for scraping (Cloudflare/Instagram) — the follow-up phase. |
+
+The machine-readable contract is [`schemas/event.schema.json`](schemas/event.schema.json)
+(JSON Schema). Validate files with `npm run validate`.
 
 ## npm scripts
 
@@ -67,3 +71,5 @@ only `title` and `startsAt` are required.
 | `npm run db:generate` / `db:migrate` | Generate & run SQL migrations (for prod). |
 | `npm run db:studio` | Drizzle Studio (browse the DB). |
 | `npm run ingest:files` | Ingest every JSON file under `data/events/`. |
+| `npm run validate [files]` | Validate event JSON against the schema (no DB). |
+| `npm run schema:gen` | Regenerate `schemas/event.schema.json` from the Zod schema. |

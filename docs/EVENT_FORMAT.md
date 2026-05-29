@@ -37,12 +37,19 @@ what you have, leave out what you don't.
   "imageUrl": "https://example.com/poster.jpg",
   "price": "12 €",
   "status": "confirmed",
-  "source": {
-    "name": "instagram",
-    "url": "https://instagram.com/p/abc123",
-    "uid": "abc123",
-    "scrapedAt": "2026-05-29T10:00:00+02:00"
-  }
+  "sources": [
+    {
+      "name": "website:teatroprincipal",
+      "url": "https://teatroprincipal.example.com/agenda/concierto",
+      "uid": "concierto-2026-06-21"
+    },
+    {
+      "name": "instagram",
+      "url": "https://instagram.com/p/abc123",
+      "uid": "abc123",
+      "scrapedAt": "2026-05-29T10:00:00+02:00"
+    }
+  ]
 }
 ```
 
@@ -66,19 +73,54 @@ what you have, leave out what you don't.
 | `imageUrl` | URL | | Poster/flyer. |
 | `price` | string | | Free text (`"12 €"`, `"Gratis"`). |
 | `status` | `confirmed` \| `tentative` \| `cancelled` | | Defaults to `confirmed`. Use `tentative` for fuzzy scrapes. |
-| `source` | string \| object | | Provenance. A bare string is shorthand for `{ "name": "..." }`. |
+| `sources` | array of source | | **Where you found the event — list every place.** See below. |
+| `source` | string \| object | | Shorthand for a single source. Combined with `sources`. |
 
-### `source` object
+### Provenance: `sources` (and `source`)
+
+**Always preserve where the event came from.** An event often appears in more
+than one place (an official site *and* an Instagram post). List them all in
+`sources` so we keep every original link; each one is stored and linked back to
+the event. Use the singular `source` only when there's exactly one — it's just
+shorthand and gets merged with `sources`.
+
+Each source is either a bare string (e.g. `"instagram"`) or an object:
 
 | Field | Type | Notes |
 | --- | --- | --- |
 | `name` | string | `"manual"`, `"ai"`, `"instagram"`, `"website:<name>"`. Defaults to `manual`. |
-| `url` | URL | Link to the origin item. |
+| `url` | URL | Link to the origin item — the page/post where you found it. |
 | `uid` | string | Stable origin id (post id, slug). Makes re-runs idempotent. |
 | `scrapedAt` | ISO 8601 datetime | When it was seen. Defaults to ingest time. |
 
-> **Tip:** always set `source.uid` when you can — it's what stops a scraper from
-> creating duplicate source rows when it re-runs over the same listing.
+```json
+"sources": [
+  { "name": "website:teatroprincipal", "url": "https://teatroprincipal.example.com/agenda/x", "uid": "x" },
+  { "name": "instagram", "url": "https://instagram.com/p/abc123", "uid": "abc123" }
+]
+```
+
+> **Tips**
+> - Include the `url` for every source — that's the link-back we surface.
+> - Set `uid` when you can — it stops re-runs from creating duplicate source rows.
+> - The event's top-level `url` defaults to the first source's `url` if you omit it.
+
+## Validate before you ship
+
+Lint any file against the schema without a database:
+
+```bash
+npm run validate data/events/my-event.json   # one file
+npm run validate                              # everything in data/events/
+```
+
+The machine-readable contract lives at
+[`schemas/event.schema.json`](../schemas/event.schema.json). Add this line to a
+JSON file for live editor validation:
+
+```json
+"$schema": "../../schemas/event.schema.json"
+```
 
 ## Batches
 

@@ -15,13 +15,18 @@ import { z } from "zod";
 export const sourceSchema = z.object({
   /** Where this came from: "manual", "ai", "instagram", "website:<name>", ... */
   name: z.string().min(1).default("manual"),
-  /** Link to the origin (post, page, listing). */
+  /** Link to the origin (post, page, listing) — where we found the event. */
   url: z.string().url().optional(),
   /** Stable id from the origin, if any (post id, slug). Enables clean re-runs. */
   uid: z.string().optional(),
   /** When it was scraped/seen. Defaults to now at ingest time. */
   scrapedAt: z.string().datetime({ offset: true }).optional(),
 });
+
+/** A source given as a bare string (e.g. "instagram") is shorthand for { name }. */
+const sourceInput = z
+  .union([z.string(), sourceSchema])
+  .transform((s) => (typeof s === "string" ? { name: s } : s));
 
 export const eventInputSchema = z.object({
   title: z.string().min(1, "title is required").trim(),
@@ -50,13 +55,15 @@ export const eventInputSchema = z.object({
 
   status: z.enum(["confirmed", "tentative", "cancelled"]).optional(),
 
-  /** Provenance. A plain string is accepted as shorthand for { name }. */
-  source: z
-    .union([z.string(), sourceSchema])
-    .optional()
-    .transform((s) =>
-      typeof s === "string" ? { name: s } : (s ?? { name: "manual" }),
-    ),
+  /**
+   * Provenance — WHERE this event came from. Preserve every place you found it.
+   * Use `sources` (array) when an event appears in more than one place; use the
+   * singular `source` as a shorthand for one. Both accept a bare string
+   * (e.g. "instagram") or an object. They're combined at ingest time, and each
+   * one is stored and linked back to the event so we keep all original links.
+   */
+  source: sourceInput.optional(),
+  sources: z.array(sourceInput).optional(),
 
   /** Optional raw origin payload, stored verbatim for debugging/reprocessing. */
   raw: z.unknown().optional(),

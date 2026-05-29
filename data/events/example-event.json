@@ -1,4 +1,5 @@
 {
+  "$schema": "../../schemas/event.schema.json",
   "title": "Concierto de ejemplo en el Teatro Principal",
   "description": "Evento de ejemplo para mostrar el formato. Bórralo cuando añadas eventos reales.",
   "startsAt": "2026-06-21T20:00:00+02:00",
@@ -11,9 +12,16 @@
   "url": "https://example.com/evento",
   "price": "12 €",
   "status": "confirmed",
-  "source": {
-    "name": "manual",
-    "url": "https://example.com/evento",
-    "uid": "example-event-1"
-  }
+  "sources": [
+    {
+      "name": "website:teatroprincipal",
+      "url": "https://teatroprincipal.example.com/agenda/concierto",
+      "uid": "concierto-2026-06-21"
+    },
+    {
+      "name": "instagram",
+      "url": "https://instagram.com/p/EXAMPLE123",
+      "uid": "EXAMPLE123"
+    }
+  ]
 }
