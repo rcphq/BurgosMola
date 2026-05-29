@@ -1,0 +1,19 @@
+{
+  "title": "Concierto de ejemplo en el Teatro Principal",
+  "description": "Evento de ejemplo para mostrar el formato. Bórralo cuando añadas eventos reales.",
+  "startsAt": "2026-06-21T20:00:00+02:00",
+  "endsAt": "2026-06-21T22:00:00+02:00",
+  "venueName": "Teatro Principal",
+  "address": "Paseo del Espolón, s/n",
+  "city": "Burgos",
+  "category": "música",
+  "tags": ["concierto", "ejemplo"],
+  "url": "https://example.com/evento",
+  "price": "12 €",
+  "status": "confirmed",
+  "source": {
+    "name": "manual",
+    "url": "https://example.com/evento",
+    "uid": "example-event-1"
+  }
+}
