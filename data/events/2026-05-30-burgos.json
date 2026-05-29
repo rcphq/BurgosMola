@@ -1,0 +1,138 @@
+[
+  {
+    "title": "‘Grease’, el musical de la Sagrada Familia (17:00)",
+    "description": "Un musical emblemático, que transporta a la era dorada y nostálgica del Rock and Roll de los años 50.",
+    "startsAt": "2026-05-30T17:00:00+02:00",
+    "venueName": "Fórum Evolución Burgos",
+    "city": "Burgos",
+    "category": "teatro",
+    "tags": ["musical"],
+    "price": "15€ – 20€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "‘Grease’, el musical de la Sagrada Familia (21:00)",
+    "description": "Un musical emblemático, que transporta a la era dorada y nostálgica del Rock and Roll de los años 50.",
+    "startsAt": "2026-05-30T21:00:00+02:00",
+    "venueName": "Fórum Evolución Burgos",
+    "city": "Burgos",
+    "category": "teatro",
+    "tags": ["musical"],
+    "price": "15€ – 20€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "‘Los lunes al sol’, de Fernando León de Aranoa e Ignacio del Moral",
+    "description": "'Los lunes al sol' es una poderosa reflexión sobre cómo las circunstancias económicas pueden moldear la identidad y las relaciones humanas.",
+    "startsAt": "2026-05-30T20:30:00+02:00",
+    "venueName": "Teatro Principal de Burgos",
+    "city": "Burgos",
+    "category": "teatro",
+    "price": "8€ – 20€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      },
+      {
+        "name": "website:agendaburgos",
+        "url": "https://www.agendaburgos.com/"
+      }
+    ]
+  },
+  {
+    "title": "Aniversario BLVCKPUDDING",
+    "description": "El aniversario BLVCKPUDDING llega a la Sala Andén 56 el 30 de mayo con Royal Residence XXL.",
+    "startsAt": "2026-05-30T23:00:00+02:00",
+    "venueName": "Sala Andén 56",
+    "city": "Burgos",
+    "category": "música",
+    "price": "12€ – 25€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "Virutas Fest — festival familiar",
+    "startsAt": "2026-05-30T12:00:00+02:00",
+    "venueName": "Hotel Rural Sabinares del Arlanza",
+    "city": "Puentedura",
+    "category": "familiar",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Manifestación — Sindicato de Vivienda de Burgos",
+    "startsAt": "2026-05-30T12:00:00+02:00",
+    "venueName": "Plaza del Mío Cid",
+    "city": "Burgos",
+    "category": "social",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Ghost Town ~ weekend ~ Warm Up",
+    "startsAt": "2026-05-30T13:00:00+02:00",
+    "venueName": "Bardeblás",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Lylo",
+    "startsAt": "2026-05-30T21:00:00+02:00",
+    "venueName": "El Sótano Café Cultural",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Los Janson",
+    "startsAt": "2026-05-30T21:00:00+02:00",
+    "venueName": "Bardeblás",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "WILLIAM en ACÚSTICO \"PLAYS AND TALES\"",
+    "startsAt": "2026-05-30T21:00:00+02:00",
+    "venueName": "Bar Picinas",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  }
+]
