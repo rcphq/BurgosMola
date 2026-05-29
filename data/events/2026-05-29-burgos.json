@@ -1,0 +1,67 @@
+[
+  {
+    "title": "Barcelona Big Blues Band",
+    "description": "La banda barcelonesa dedicada al blues y R&B en gran formato, bajo la dirección del contrabajista Ivan Kovacevic.",
+    "startsAt": "2026-05-29T19:30:00+02:00",
+    "venueName": "Auditorio elcírculo",
+    "address": "C/ Ana Lopidana, 6",
+    "city": "Burgos",
+    "category": "música",
+    "price": "5€ – 7€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "Un Dios Salvaje",
+    "description": "Esta comedia negra narra cómo dos matrimonios educados se reúnen para resolver de forma civilizada una pelea escolar entre sus hijos.",
+    "startsAt": "2026-05-29T19:30:00+02:00",
+    "venueName": "Auditorio Isabel I",
+    "city": "Burgos",
+    "category": "teatro",
+    "price": "5€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "La venganza de Don Mendo",
+    "description": "La Asociación Bendito Cariñena nace con el objetivo de transmitir a las nuevas generaciones el legado del autor de La Venganza de Don Mendo.",
+    "startsAt": "2026-05-29T20:30:00+02:00",
+    "venueName": "Teatro Principal de Burgos",
+    "city": "Burgos",
+    "category": "teatro",
+    "price": "10€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "‘Biografía’, con Rafa Sánchez de La Unión",
+    "description": "Biografía es un recorrido cronológico por las canciones más icónicas de La Unión, que pretende acercar la figura más humana, más entrañable.",
+    "startsAt": "2026-05-29T21:00:00+02:00",
+    "venueName": "Fórum Evolución Burgos",
+    "city": "Burgos",
+    "category": "música",
+    "price": "30€ – 38€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  }
+]

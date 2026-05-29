@@ -1,0 +1,52 @@
+[
+  {
+    "title": "‘Grease’, el musical de la Sagrada Familia",
+    "description": "Un musical emblemático, que transporta a la era dorada y nostálgica del Rock and Roll de los años 50.",
+    "startsAt": "2026-05-31T17:00:00+02:00",
+    "venueName": "Fórum Evolución Burgos",
+    "city": "Burgos",
+    "category": "teatro",
+    "tags": ["musical"],
+    "price": "15€ – 20€",
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "website:burgosmoderno",
+        "url": "https://burgosmoderno.com/planes-para-este-fin-de-semana-en-burgos/"
+      }
+    ]
+  },
+  {
+    "title": "Feria del Libro",
+    "startsAt": "2026-05-31T00:00:00+02:00",
+    "allDay": true,
+    "city": "Burgos",
+    "category": "literatura",
+    "status": "tentative",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "WILLIAM en ACÚSTICO \"PLAYS AND TALES\"",
+    "startsAt": "2026-05-31T19:30:00+02:00",
+    "venueName": "Rogue Café Lounge",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Burgos Baroque Ensemble. Torre metropolitana",
+    "startsAt": "2026-05-31T20:30:00+02:00",
+    "venueName": "Catedral de Burgos",
+    "city": "Burgos",
+    "category": "música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  }
+]
