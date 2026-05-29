@@ -12,14 +12,15 @@
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
+import { getDatabaseUrl } from "../src/lib/db";
 import { ingestEvents } from "../src/lib/events/ingest";
 
 const EVENTS_DIR = join(process.cwd(), "data", "events");
 
 async function main() {
-  if (!process.env.DATABASE_URL) {
+  if (!getDatabaseUrl()) {
     console.error(
-      "DATABASE_URL is not set — skipping file ingestion. (Set it in .env.local.)",
+      "No database URL configured — skipping file ingestion. (Set DATABASE_URL in .env.local.)",
     );
     // Exit 0 so this doesn't fail builds before the DB is configured.
     process.exit(0);

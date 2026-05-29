@@ -89,12 +89,16 @@ re-running file ingestion on every deploy is safe.
 
 ## Deploying on Vercel
 
-- Set `DATABASE_URL`, `INGEST_TOKEN`, and optional `DEFAULT_*` env vars in the
-  Vercel project.
-- Use Neon (directly, or via the Vercel Neon integration). The app uses Neon's
-  HTTP driver (`drizzle-orm/neon-http`), which is serverless-friendly — no
-  connection pooling headaches.
-- For production schema changes prefer generated migrations
-  (`db:generate` + `db:migrate`); `db:push` is fine for local/early dev.
-- Optionally call `npm run ingest:files` as part of the build to pick up newly
-  committed `data/events/*.json`.
+- Use Neon (directly, or via the **Vercel ↔ Neon integration**, which injects
+  `DATABASE_URL`/`POSTGRES_URL` automatically). The app uses Neon's HTTP driver
+  (`drizzle-orm/neon-http`), which is serverless-friendly — no connection
+  pooling headaches. `getDatabaseUrl()` accepts whichever variable the
+  integration set.
+- Set `INGEST_TOKEN` (and optional `DEFAULT_*`) env vars in the Vercel project.
+- **The deploy self-initializes.** Vercel runs the `vercel-build` script, which
+  applies migrations (`scripts/migrate.ts`) and ingests `data/events/*.json`
+  (`scripts/ingest-files.ts`) before `next build`. Both steps skip gracefully if
+  no database URL is set, so they never break a build.
+- ⚠️ Env var changes only take effect on the **next deploy** — redeploy after
+  connecting the database.
+- For local schema work: `npm run db:push` (quick) or `db:generate` + `migrate`.

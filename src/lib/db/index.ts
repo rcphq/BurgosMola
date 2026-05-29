@@ -12,18 +12,34 @@ import * as schema from "./schema";
  */
 let _db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 
+/**
+ * Resolve the Postgres connection string. We prefer DATABASE_URL but also accept
+ * the variable names the Vercel ↔ Neon integration injects, so the app works
+ * whether you set DATABASE_URL yourself or rely on the connector's vars.
+ * (Pooled URLs are preferred for the serverless HTTP driver.)
+ */
+export function getDatabaseUrl(): string | undefined {
+  return (
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.DATABASE_URL_UNPOOLED ||
+    process.env.POSTGRES_URL_NON_POOLING
+  );
+}
+
 export function isDatabaseConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(getDatabaseUrl());
 }
 
 export function getDb() {
-  if (!process.env.DATABASE_URL) {
+  const url = getDatabaseUrl();
+  if (!url) {
     throw new Error(
-      "DATABASE_URL is not set. Copy .env.example to .env.local and add your Neon connection string.",
+      "No database connection string found. Set DATABASE_URL (or use the Vercel Neon integration, which injects POSTGRES_URL).",
     );
   }
   if (!_db) {
-    const client = neon(process.env.DATABASE_URL);
+    const client = neon(url);
     _db = drizzle(client, { schema });
   }
   return _db;
