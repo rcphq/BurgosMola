@@ -1,5 +1,5 @@
-import type { EventRow } from "@/lib/db/schema";
 import { AddToCalendar } from "@/components/AddToCalendar";
+import type { EventWithSources } from "@/lib/events/queries";
 
 function formatTime(date: Date, timezone: string): string {
   return new Intl.DateTimeFormat("es-ES", {
@@ -9,7 +9,12 @@ function formatTime(date: Date, timezone: string): string {
   }).format(date);
 }
 
-export function EventCard({ event }: { event: EventRow }) {
+/** "website:teatroprincipal" -> "teatroprincipal" for a friendlier label. */
+function sourceLabel(name: string): string {
+  return name.replace(/^website:/, "");
+}
+
+export function EventCard({ event }: { event: EventWithSources }) {
   const location = [event.venueName, event.city].filter(Boolean).join(" · ");
 
   return (
@@ -54,6 +59,28 @@ export function EventCard({ event }: { event: EventRow }) {
           {event.price && (
             <p className="mt-2 text-xs font-medium text-neutral-500">
               {event.price}
+            </p>
+          )}
+          {event.sources.length > 0 && (
+            <p className="mt-2 text-xs text-neutral-400">
+              Fuentes:{" "}
+              {event.sources.map((s, i) => (
+                <span key={`${s.name}-${i}`}>
+                  {i > 0 && ", "}
+                  {s.url ? (
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-neutral-600 dark:hover:text-neutral-300"
+                    >
+                      {sourceLabel(s.name)}
+                    </a>
+                  ) : (
+                    sourceLabel(s.name)
+                  )}
+                </span>
+              ))}
             </p>
           )}
         </div>

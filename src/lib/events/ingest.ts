@@ -6,6 +6,7 @@ import {
   buildDedupeKey,
   diceSimilarity,
   FUZZY_MERGE_THRESHOLD,
+  FUZZY_TIME_WINDOW_MINUTES,
   normalizeTitle,
 } from "@/lib/events/dedupe";
 import {
@@ -35,7 +36,12 @@ function coalesce<T>(existing: T | null | undefined, incoming: T | null | undefi
   return (existing ?? null) as T | null;
 }
 
-/** Find an existing event that is fuzzily the same (same day, similar title). */
+/**
+ * Find an existing event that is fuzzily the same: a similar title AND a start
+ * time within FUZZY_TIME_WINDOW_MINUTES. The time guard is what keeps two
+ * showings of the same title/venue on the same day from merging, while still
+ * merging the same showing reported by different sources.
+ */
 async function findFuzzyMatch(
   db: ReturnType<typeof getDb>,
   input: ParsedEventInput,
@@ -53,6 +59,9 @@ async function findFuzzyMatch(
 
   let best: { row: EventRow; similarity: number } | null = null;
   for (const row of sameDay) {
+    const minutesApart =
+      Math.abs(row.startsAt.getTime() - start.getTime()) / 60000;
+    if (minutesApart > FUZZY_TIME_WINDOW_MINUTES) continue;
     const sim = diceSimilarity(row.title, input.title);
     if (sim >= FUZZY_MERGE_THRESHOLD && (!best || sim > best.similarity)) {
       best = { row, similarity: sim };
