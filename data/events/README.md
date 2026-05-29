@@ -7,6 +7,9 @@ events in the [canonical format](../../docs/EVENT_FORMAT.md).
 npm run ingest:files   # ingest everything in this folder (idempotent)
 ```
 
+- Start from [`_TEMPLATE.jsonc`](_TEMPLATE.jsonc): copy it to a real `.json`
+  file, fill it in, delete what you don't use. (The `.jsonc` template itself is
+  never ingested or validated — those only pick up `*.json`.)
 - Naming: `YYYY-MM-DD-short-title.json` keeps things sorted and readable. The
   filename is not parsed — only the contents matter.
 - Idempotent: re-ingesting merges sources instead of creating duplicates, so

@@ -1,0 +1,57 @@
+// TEMPLATE — copy this to a new file named like `2026-06-21-mi-evento.json`
+// (a real `.json` file, NOT `.jsonc`), then fill it in and delete what you don't use.
+//
+// This `.jsonc` template is NOT ingested or validated (those only pick up `.json`).
+// Only `title` and `startsAt` are required. Remove any field you don't have —
+// do not leave placeholder values in. Full reference: docs/EVENT_FORMAT.md
+{
+  // Enables live validation in editors (VS Code, etc.). Keep it in your .json too.
+  "$schema": "../../schemas/event.schema.json",
+
+  // --- Required ---------------------------------------------------------------
+  "title": "Nombre del evento",
+  // ISO 8601 with timezone offset. Burgos: +02:00 in summer (CEST), +01:00 winter (CET).
+  "startsAt": "2026-06-21T20:00:00+02:00",
+
+  // --- When (optional) --------------------------------------------------------
+  "endsAt": "2026-06-21T22:00:00+02:00",
+  "timezone": "Europe/Madrid",
+  "allDay": false,
+
+  // --- What (optional) --------------------------------------------------------
+  "description": "Breve descripción del evento.",
+  "category": "música",                 // música, teatro, deporte, exposición, infantil...
+  "tags": ["concierto"],
+  "price": "12 €",                       // free text: "Gratis", "Desde 10 €", etc.
+  "imageUrl": "https://example.com/cartel.jpg",
+  "status": "confirmed",                 // confirmed | tentative | cancelled
+
+  // --- Where (optional) -------------------------------------------------------
+  "venueName": "Teatro Principal",
+  "address": "Paseo del Espolón, s/n",
+  "city": "Burgos",                      // defaults to Burgos if omitted
+  "lat": 42.3409,
+  "lng": -3.7009,
+
+  // --- Canonical link (optional) ---------------------------------------------
+  // Defaults to the first source URL below if you omit it.
+  "url": "https://example.com/evento",
+
+  // --- Provenance (IMPORTANT) -------------------------------------------------
+  // List EVERY place you found this event so all original links are preserved.
+  // Each entry: { "name": ..., "url": ..., "uid": ... }. Names: "instagram",
+  // "website:<short>", "manual", "ai". Never invent URLs. Set "uid" when you can
+  // (post id / page slug) so re-runs don't create duplicate source rows.
+  "sources": [
+    {
+      "name": "website:teatroprincipal",
+      "url": "https://teatroprincipal.example.com/agenda/evento",
+      "uid": "evento-2026-06-21"
+    },
+    {
+      "name": "instagram",
+      "url": "https://instagram.com/p/ABC123",
+      "uid": "ABC123"
+    }
+  ]
+}

@@ -61,26 +61,57 @@ async function findFuzzyMatch(
   return best;
 }
 
-async function upsertSource(
+type NormalizedSource = NonNullable<ParsedEventInput["source"]>;
+
+/**
+ * Gather every source the payload references — both the singular `source` and
+ * the `sources` array — de-duplicated. Falls back to a single "manual" source
+ * so an event always has at least one provenance record.
+ */
+function collectSources(input: ParsedEventInput): NormalizedSource[] {
+  const list: NormalizedSource[] = [
+    ...(input.sources ?? []),
+    ...(input.source ? [input.source] : []),
+  ];
+  if (list.length === 0) list.push({ name: "manual" });
+
+  const seen = new Set<string>();
+  return list.filter((s) => {
+    const key = `${s.name}|${s.uid ?? ""}|${s.url ?? ""}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/** The best canonical URL: the event's own, else the first source link. */
+function primaryUrl(input: ParsedEventInput): string | null {
+  if (input.url) return input.url;
+  return collectSources(input).find((s) => s.url)?.url ?? null;
+}
+
+/** Record every source for an event, linking each back to the origin. */
+async function upsertSources(
   db: ReturnType<typeof getDb>,
   eventId: string,
   input: ParsedEventInput,
 ) {
-  const source = input.source ?? { name: "manual" };
-  await db
-    .insert(eventSources)
-    .values({
-      eventId,
-      source: source.name,
-      sourceUrl: source.url ?? input.url ?? null,
-      sourceUid: source.uid ?? null,
-      raw: input.raw ?? null,
-      scrapedAt: source.scrapedAt ? new Date(source.scrapedAt) : new Date(),
-    })
-    // If this exact origin item was already recorded, leave it be.
-    .onConflictDoNothing({
-      target: [eventSources.source, eventSources.sourceUid],
-    });
+  for (const source of collectSources(input)) {
+    await db
+      .insert(eventSources)
+      .values({
+        eventId,
+        source: source.name,
+        sourceUrl: source.url ?? input.url ?? null,
+        sourceUid: source.uid ?? null,
+        raw: input.raw ?? null,
+        scrapedAt: source.scrapedAt ? new Date(source.scrapedAt) : new Date(),
+      })
+      // If this exact origin item was already recorded, leave it be.
+      .onConflictDoNothing({
+        target: [eventSources.source, eventSources.sourceUid],
+      });
+  }
 }
 
 /** Ingest one validated event: dedupe, then create / merge / update. */
@@ -122,7 +153,7 @@ async function ingestOne(
         lng: row.lng ?? input.lng ?? null,
         category: coalesce(row.category, input.category),
         tags: row.tags?.length ? row.tags : (input.tags ?? []),
-        url: coalesce(row.url, input.url),
+        url: coalesce(row.url, primaryUrl(input)),
         imageUrl: coalesce(row.imageUrl, input.imageUrl),
         price: coalesce(row.price, input.price),
         status: input.status ?? row.status,
@@ -130,7 +161,7 @@ async function ingestOne(
       })
       .where(eq(events.id, row.id));
 
-    await upsertSource(db, row.id, input);
+    await upsertSources(db, row.id, input);
 
     return {
       action: exact ? "updated" : "merged",
@@ -160,14 +191,14 @@ async function ingestOne(
       lng: input.lng ?? null,
       category: input.category ?? null,
       tags: input.tags ?? [],
-      url: input.url ?? null,
+      url: primaryUrl(input),
       imageUrl: input.imageUrl ?? null,
       price: input.price ?? null,
       status: input.status ?? "confirmed",
     })
     .returning();
 
-  await upsertSource(db, created.id, input);
+  await upsertSources(db, created.id, input);
 
   return { action: "created", eventId: created.id, title: created.title };
 }
