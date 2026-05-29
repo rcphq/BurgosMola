@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "tsx scripts/migrate.ts && tsx scripts/ingest-files.ts && next build",
+    "migrate": "tsx scripts/migrate.ts",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
