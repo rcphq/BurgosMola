@@ -18,6 +18,7 @@ export function FilterBar({ showDateChips = true }: { showDateChips?: boolean })
   const params = useSearchParams();
   const activeCategory = params.get("category") ?? "";
   const activeDate = params.get("date") ?? "";
+  const activeView = params.get("view") ?? "list";
 
   function setFilter(key: "category" | "date", value: string) {
     const next = new URLSearchParams(params.toString());
@@ -25,6 +26,17 @@ export function FilterBar({ showDateChips = true }: { showDateChips?: boolean })
       next.delete(key); // toggle off
     } else {
       next.set(key, value);
+    }
+    const qs = next.toString();
+    router.push(qs ? `${pathname}?${qs}` : pathname);
+  }
+
+  function setView(value: "list" | "calendar") {
+    const next = new URLSearchParams(params.toString());
+    if (value === "list") {
+      next.delete("view");
+    } else {
+      next.set("view", value);
     }
     const qs = next.toString();
     router.push(qs ? `${pathname}?${qs}` : pathname);
@@ -54,26 +66,42 @@ export function FilterBar({ showDateChips = true }: { showDateChips?: boolean })
         ))}
       </div>
 
-      {/* Date chips */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        {showDateChips &&
-          DATE_CHIPS.map(({ label, value }) => (
-            <button
-              key={value}
-              onClick={() => setFilter("date", value)}
-              className={`${chipBase} ${activeDate === value ? chipActive : chipInactive}`}
+      {/* Date chips + view toggle */}
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-1 min-w-0">
+          {showDateChips &&
+            DATE_CHIPS.map(({ label, value }) => (
+              <button
+                key={value}
+                onClick={() => setFilter("date", value)}
+                className={`${chipBase} ${activeDate === value ? chipActive : chipInactive}`}
+              >
+                {label}
+              </button>
+            ))}
+          {hasFilters && (
+            <Link
+              href={pathname}
+              className="ml-auto shrink-0 text-xs text-neutral-400 underline-offset-2 hover:underline dark:text-neutral-500"
             >
-              {label}
-            </button>
-          ))}
-        {hasFilters && (
-          <Link
-            href={pathname}
-            className="ml-auto shrink-0 text-xs text-neutral-400 underline-offset-2 hover:underline dark:text-neutral-500"
+              Limpiar filtros
+            </Link>
+          )}
+        </div>
+        <div className="flex shrink-0 gap-1 pb-1 pl-2 border-l border-neutral-200 dark:border-neutral-700">
+          <button
+            onClick={() => setView("list")}
+            className={`${chipBase} ${activeView === "list" ? chipActive : chipInactive}`}
           >
-            Limpiar filtros
-          </Link>
-        )}
+            Lista
+          </button>
+          <button
+            onClick={() => setView("calendar")}
+            className={`${chipBase} ${activeView === "calendar" ? chipActive : chipInactive}`}
+          >
+            Semana
+          </button>
+        </div>
       </div>
     </div>
   );

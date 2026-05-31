@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import { isDatabaseConfigured } from "@/lib/db";
 import { EventCard } from "@/components/EventCard";
 import { FilterBar } from "@/components/FilterBar";
+import { CalendarView } from "@/components/CalendarView";
 import { getUpcomingEvents, groupByDay, type EventFilters } from "@/lib/events/queries";
+import type { EventRow } from "@/lib/db/schema";
 
 // Always read fresh from the DB; events change as scrapers/ingest run.
 export const dynamic = "force-dynamic";
@@ -53,18 +55,25 @@ export default async function HomePage({
     );
   }
 
+  const isCalendar = sp.view === "calendar";
+
   const filters: EventFilters = {
     category: typeof sp.category === "string" ? sp.category : undefined,
-    date: typeof sp.date === "string"
-      ? (sp.date as EventFilters["date"])
-      : undefined,
+    date: isCalendar
+      ? "week"
+      : typeof sp.date === "string"
+        ? (sp.date as EventFilters["date"])
+        : undefined,
   };
 
   const now = new Date();
-  let days: [string, Awaited<ReturnType<typeof getUpcomingEvents>>][];
+  let events: EventRow[] = [];
+  let days: [string, EventRow[]][] = [];
   try {
-    const events = await getUpcomingEvents(200, filters);
-    days = [...groupByDay(events).entries()];
+    events = await getUpcomingEvents(200, filters);
+    if (!isCalendar) {
+      days = [...groupByDay(events).entries()];
+    }
   } catch (err) {
     return (
       <>
@@ -77,7 +86,15 @@ export default async function HomePage({
   return (
     <div>
       <Suspense><FilterBar /></Suspense>
-      {days.length === 0 ? (
+      {isCalendar ? (
+        events.length === 0 ? (
+          <p className="text-sm text-neutral-500">
+            No hay eventos para los filtros seleccionados.
+          </p>
+        ) : (
+          <CalendarView events={events} />
+        )
+      ) : days.length === 0 ? (
         <p className="text-sm text-neutral-500">
           No hay eventos para los filtros seleccionados.
         </p>
