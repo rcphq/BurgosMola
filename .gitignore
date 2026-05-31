@@ -32,3 +32,6 @@ yarn-error.log*
 
 # drizzle (generated migration journal is committed; local studio cache is not)
 .drizzle/
+
+# claude code agent scratch space
+.claude/
