@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none">
+  <!-- Decorative arch (cathedral-inspired) -->
+  <path d="M8 44 L8 28 Q8 14 20 14 Q32 14 32 28 L32 44" stroke="#C2410C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wordmark: Burgos in dark, Mola in brand orange-red -->
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" y="42">
+    <tspan x="44" fill="#1C1917">Burgos</tspan><tspan fill="#C2410C">Mola</tspan>
+  </text>
+</svg>

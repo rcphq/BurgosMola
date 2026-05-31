@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizeCategory } from "@/lib/categories";
 
 /**
  * THE canonical event format.
@@ -46,7 +47,7 @@ export const eventInputSchema = z.object({
   lat: z.number().min(-90).max(90).optional(),
   lng: z.number().min(-180).max(180).optional(),
 
-  category: z.string().trim().optional(),
+  category: z.string().trim().transform(normalizeCategory).optional(),
   tags: z.array(z.string().trim()).optional(),
 
   url: z.string().url().optional(),

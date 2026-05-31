@@ -5,7 +5,7 @@
     "startsAt": "2026-05-30T17:00:00+02:00",
     "venueName": "Fórum Evolución Burgos",
     "city": "Burgos",
-    "category": "teatro",
+    "category": "Teatro y Danza",
     "tags": ["musical"],
     "price": "15€ – 20€",
     "status": "confirmed",
@@ -22,7 +22,7 @@
     "startsAt": "2026-05-30T21:00:00+02:00",
     "venueName": "Fórum Evolución Burgos",
     "city": "Burgos",
-    "category": "teatro",
+    "category": "Teatro y Danza",
     "tags": ["musical"],
     "price": "15€ – 20€",
     "status": "confirmed",
@@ -39,7 +39,7 @@
     "startsAt": "2026-05-30T20:30:00+02:00",
     "venueName": "Teatro Principal de Burgos",
     "city": "Burgos",
-    "category": "teatro",
+    "category": "Teatro y Danza",
     "price": "8€ – 20€",
     "status": "confirmed",
     "sources": [
@@ -59,7 +59,7 @@
     "startsAt": "2026-05-30T23:00:00+02:00",
     "venueName": "Sala Andén 56",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "price": "12€ – 25€",
     "status": "confirmed",
     "sources": [
@@ -74,7 +74,7 @@
     "startsAt": "2026-05-30T12:00:00+02:00",
     "venueName": "Hotel Rural Sabinares del Arlanza",
     "city": "Puentedura",
-    "category": "familiar",
+    "category": "Familiar",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
@@ -85,7 +85,7 @@
     "startsAt": "2026-05-30T12:00:00+02:00",
     "venueName": "Plaza del Mío Cid",
     "city": "Burgos",
-    "category": "social",
+    "category": "Otro",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
@@ -96,7 +96,7 @@
     "startsAt": "2026-05-30T13:00:00+02:00",
     "venueName": "Bardeblás",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
@@ -107,7 +107,7 @@
     "startsAt": "2026-05-30T21:00:00+02:00",
     "venueName": "El Sótano Café Cultural",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
@@ -118,7 +118,7 @@
     "startsAt": "2026-05-30T21:00:00+02:00",
     "venueName": "Bardeblás",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
@@ -129,7 +129,7 @@
     "startsAt": "2026-05-30T21:00:00+02:00",
     "venueName": "Bar Picinas",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "status": "confirmed",
     "sources": [
       { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
