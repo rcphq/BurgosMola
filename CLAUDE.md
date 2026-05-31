@@ -57,14 +57,20 @@ JSON sources (data/events/*.json or POST /api/ingest)
 | Queries | `src/lib/events/queries.ts` | `getUpcomingEvents()` with category/date filters; `groupByDay()` |
 | ICS generation | `src/lib/events/ics.ts` | RFC 5545 output + Google/Outlook calendar URLs |
 | Categories | `src/lib/categories.ts` | 8 canonical categories, alias map (lowercase → canonical), Tailwind color map |
+| Places directory | `src/lib/places.ts` | Hand-maintained `PLACES` array + `placesBySection()` grouped by section |
 | API routes | `src/app/api/` | `POST /api/ingest` (bearer token), `GET /api/calendar.ics`, `GET /api/events/[id]/ics` |
-| UI | `src/app/page.tsx` | Server component; filter state lives in URL search params (`?category=X&date=Y`) |
+| UI — upcoming | `src/app/page.tsx` | Server component; category + date filters in URL search params |
+| UI — past | `src/app/pasados/page.tsx` | Server component; `getPastEvents()`, category filter only (no date chips) |
+| UI — places | `src/app/lugares/page.tsx` | Static server component; renders `placesBySection()` |
+| Nav | `src/components/Nav.tsx` | Client tab bar (Próximos / Pasados / Lugares); active state from `usePathname()` |
 
 **Key invariants:**
 - `dedupeKey` = normalized title + date + venue — must remain stable; changing it creates duplicates
 - `event_sources` tracks raw provenance per `(source, sourceUid)` unique pair; one canonical event can have multiple sources
-- `page.tsx` is `force-dynamic` — no caching, always reads live DB
-- Client components (`FilterBar`, `ShareButtons`) use `useRouter`/`useSearchParams` for filter state; no global state library
+- `page.tsx` and `pasados/page.tsx` are both `force-dynamic` — no caching, always read live DB
+- Client components (`FilterBar`, `Nav`, `ShareButtons`) use `useRouter`/`useSearchParams`/`usePathname`; no global state library
+- `FilterBar` is path-aware: `setFilter` pushes to `pathname` (not hardcoded `/`); pass `showDateChips={false}` on Pasados
+- `EventCard` accepts optional `isPast` prop — dims the card with `opacity-55`; always pass it when rendering past events
 - Category aliases normalize at ingest time; always use canonical names from `src/lib/categories.ts` in new code
 
 **Adding a new category:** update the enum in `src/lib/categories.ts`, add aliases and a Tailwind color, then run `npm run schema:gen` to regenerate `schemas/event.schema.json`.
