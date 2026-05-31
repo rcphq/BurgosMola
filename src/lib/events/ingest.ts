@@ -151,7 +151,9 @@ async function ingestOne(
         address: coalesce(row.address, input.address),
         lat: row.lat ?? input.lat ?? null,
         lng: row.lng ?? input.lng ?? null,
-        category: coalesce(row.category, input.category),
+        // Always prefer the incoming category (normalized by Zod) so stale DB
+        // values get corrected on re-ingest. Fall back to existing if none provided.
+        category: input.category ?? row.category ?? null,
         tags: row.tags?.length ? row.tags : (input.tags ?? []),
         url: coalesce(row.url, primaryUrl(input)),
         imageUrl: coalesce(row.imageUrl, input.imageUrl),

@@ -17,7 +17,9 @@
     "db:studio": "drizzle-kit studio",
     "ingest:files": "tsx scripts/ingest-files.ts",
     "schema:gen": "tsx scripts/gen-schema.ts",
-    "validate": "tsx scripts/validate.ts"
+    "validate": "tsx scripts/validate.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
@@ -39,6 +41,7 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^4.1.7"
   }
 }

@@ -8,41 +8,54 @@ export type EventFilters = {
   date?: "today" | "weekend" | "week" | "month";
 };
 
+/** Compute the [rangeStart, rangeEnd] for a date filter. Exported for testing. */
+export function getDateRange(
+  date: EventFilters["date"],
+  now = new Date()
+): { rangeStart: Date; rangeEnd?: Date } {
+  const startOfToday = new Date(now);
+  startOfToday.setHours(0, 0, 0, 0);
+
+  if (date === "today") {
+    const rangeEnd = new Date(startOfToday);
+    rangeEnd.setHours(23, 59, 59, 999);
+    return { rangeStart: startOfToday, rangeEnd };
+  }
+
+  if (date === "weekend") {
+    const day = now.getDay(); // 0=Sun, 6=Sat
+    // daysUntilSat: 0 on Sat, -1 on Sun (show the past Saturday), else 6-day
+    const daysUntilSat = day === 6 ? 0 : day === 0 ? -1 : 6 - day;
+    const sat = new Date(startOfToday);
+    sat.setDate(sat.getDate() + daysUntilSat);
+    const sun = new Date(sat);
+    sun.setDate(sun.getDate() + 1);
+    sun.setHours(23, 59, 59, 999);
+    return { rangeStart: sat, rangeEnd: sun };
+  }
+
+  if (date === "week") {
+    const rangeEnd = new Date(startOfToday);
+    rangeEnd.setDate(rangeEnd.getDate() + 7);
+    return { rangeStart: startOfToday, rangeEnd };
+  }
+
+  if (date === "month") {
+    const rangeEnd = new Date(startOfToday);
+    rangeEnd.setDate(rangeEnd.getDate() + 30);
+    return { rangeStart: startOfToday, rangeEnd };
+  }
+
+  return { rangeStart: startOfToday };
+}
+
 /** Upcoming events (from the start of today), soonest first. */
 export async function getUpcomingEvents(
   limit = 200,
   filters: EventFilters = {}
 ): Promise<EventRow[]> {
   const db = getDb();
-  const now = new Date();
-  const startOfToday = new Date(now);
-  startOfToday.setHours(0, 0, 0, 0);
-
-  // Date range bounds
-  let rangeEnd: Date | undefined;
-  let rangeStart = startOfToday;
-
-  if (filters.date === "today") {
-    rangeEnd = new Date(startOfToday);
-    rangeEnd.setHours(23, 59, 59, 999);
-  } else if (filters.date === "weekend") {
-    // Next Saturday and Sunday from today
-    const day = now.getDay(); // 0=Sun,6=Sat
-    const daysUntilSat = day === 6 ? 0 : (6 - day);
-    const sat = new Date(startOfToday);
-    sat.setDate(sat.getDate() + daysUntilSat);
-    const sun = new Date(sat);
-    sun.setDate(sun.getDate() + 1);
-    sun.setHours(23, 59, 59, 999);
-    rangeStart = sat;
-    rangeEnd = sun;
-  } else if (filters.date === "week") {
-    rangeEnd = new Date(startOfToday);
-    rangeEnd.setDate(rangeEnd.getDate() + 7);
-  } else if (filters.date === "month") {
-    rangeEnd = new Date(startOfToday);
-    rangeEnd.setDate(rangeEnd.getDate() + 30);
-  }
+  const { rangeStart, rangeEnd } = getDateRange(filters.date);
 
   const conditions = [gte(events.startsAt, rangeStart)];
   if (rangeEnd) conditions.push(lte(events.startsAt, rangeEnd));
