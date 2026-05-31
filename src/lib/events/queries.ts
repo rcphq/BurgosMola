@@ -1,4 +1,4 @@
-import { and, asc, gte, lte, eq } from "drizzle-orm";
+import { and, asc, desc, gte, lt, lte, eq } from "drizzle-orm";
 
 import { getDb } from "@/lib/db";
 import { events, type EventRow } from "@/lib/db/schema";
@@ -66,6 +66,26 @@ export async function getUpcomingEvents(
     .from(events)
     .where(and(...conditions))
     .orderBy(asc(events.startsAt))
+    .limit(limit);
+}
+
+/** Past events (before the start of today), most recent first. */
+export async function getPastEvents(
+  limit = 200,
+  filters: Pick<EventFilters, "category"> = {}
+): Promise<EventRow[]> {
+  const db = getDb();
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const conditions = [lt(events.startsAt, startOfToday)];
+  if (filters.category) conditions.push(eq(events.category, filters.category));
+
+  return db
+    .select()
+    .from(events)
+    .where(and(...conditions))
+    .orderBy(desc(events.startsAt))
     .limit(limit);
 }
 

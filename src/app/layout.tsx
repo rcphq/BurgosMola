@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Nav } from "@/components/Nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default function RootLayout({
             <p className="mt-2 text-sm text-neutral-500">
               Guía de eventos en Burgos — conciertos, cultura, deporte y más.
             </p>
+            <Nav />
           </header>
           <main>{children}</main>
           <footer className="mt-16 border-t border-neutral-200 pt-6 text-xs text-neutral-400 dark:border-neutral-800">

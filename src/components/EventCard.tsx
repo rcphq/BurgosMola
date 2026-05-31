@@ -11,11 +11,21 @@ function formatTime(date: Date, timezone: string): string {
   }).format(date);
 }
 
-export function EventCard({ event }: { event: EventRow }) {
+export function EventCard({
+  event,
+  isPast = false,
+}: {
+  event: EventRow;
+  isPast?: boolean;
+}) {
   const location = [event.venueName, event.city].filter(Boolean).join(" · ");
 
   return (
-    <article className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+    <article
+      className={`rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+        isPast ? "opacity-55" : ""
+      }`}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-center gap-2 text-xs text-neutral-500">
