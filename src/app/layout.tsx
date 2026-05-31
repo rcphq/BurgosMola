@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     title: "BurgosMola – Eventos en Burgos",
     description: "Guía unificada de eventos en Burgos.",
   },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -30,16 +33,16 @@ export default function RootLayout({
       <body className="font-sans">
         <div className="mx-auto max-w-3xl px-4 py-8">
           <header className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight">
-              Burgos Event Hub
-            </h1>
-            <p className="mt-1 text-sm text-neutral-500">
-              One guide to what&apos;s happening, gathered from many sources.
+            <a href="/" aria-label="BurgosMola inicio">
+              <img src="/logo.svg" alt="BurgosMola" className="h-10 w-auto" />
+            </a>
+            <p className="mt-2 text-sm text-neutral-500">
+              Guía de eventos en Burgos — conciertos, cultura, deporte y más.
             </p>
           </header>
           <main>{children}</main>
           <footer className="mt-16 border-t border-neutral-200 pt-6 text-xs text-neutral-400 dark:border-neutral-800">
-            Burgos Event Hub — events merged from multiple sources.
+            BurgosMola — eventos en Burgos
           </footer>
         </div>
       </body>
