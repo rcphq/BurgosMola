@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 
@@ -11,8 +11,10 @@ const DATE_CHIPS = [
   { label: "Este mes", value: "month" },
 ] as const;
 
-export function FilterBar() {
+/** When true, hide the future-oriented date chips (e.g. on the Pasados archive). */
+export function FilterBar({ showDateChips = true }: { showDateChips?: boolean }) {
   const router = useRouter();
+  const pathname = usePathname();
   const params = useSearchParams();
   const activeCategory = params.get("category") ?? "";
   const activeDate = params.get("date") ?? "";
@@ -24,7 +26,8 @@ export function FilterBar() {
     } else {
       next.set(key, value);
     }
-    router.push(`/?${next.toString()}`);
+    const qs = next.toString();
+    router.push(qs ? `${pathname}?${qs}` : pathname);
   }
 
   const hasFilters = activeCategory || activeDate;
@@ -53,18 +56,19 @@ export function FilterBar() {
 
       {/* Date chips */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        {DATE_CHIPS.map(({ label, value }) => (
-          <button
-            key={value}
-            onClick={() => setFilter("date", value)}
-            className={`${chipBase} ${activeDate === value ? chipActive : chipInactive}`}
-          >
-            {label}
-          </button>
-        ))}
+        {showDateChips &&
+          DATE_CHIPS.map(({ label, value }) => (
+            <button
+              key={value}
+              onClick={() => setFilter("date", value)}
+              className={`${chipBase} ${activeDate === value ? chipActive : chipInactive}`}
+            >
+              {label}
+            </button>
+          ))}
         {hasFilters && (
           <Link
-            href="/"
+            href={pathname}
             className="ml-auto shrink-0 text-xs text-neutral-400 underline-offset-2 hover:underline dark:text-neutral-500"
           >
             Limpiar filtros
