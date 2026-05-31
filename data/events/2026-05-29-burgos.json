@@ -6,7 +6,7 @@
     "venueName": "Auditorio elcírculo",
     "address": "C/ Ana Lopidana, 6",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "price": "5€ – 7€",
     "status": "confirmed",
     "sources": [
@@ -22,7 +22,7 @@
     "startsAt": "2026-05-29T19:30:00+02:00",
     "venueName": "Auditorio Isabel I",
     "city": "Burgos",
-    "category": "teatro",
+    "category": "Teatro y Danza",
     "price": "5€",
     "status": "confirmed",
     "sources": [
@@ -38,7 +38,7 @@
     "startsAt": "2026-05-29T20:30:00+02:00",
     "venueName": "Teatro Principal de Burgos",
     "city": "Burgos",
-    "category": "teatro",
+    "category": "Teatro y Danza",
     "price": "10€",
     "status": "confirmed",
     "sources": [
@@ -54,7 +54,7 @@
     "startsAt": "2026-05-29T21:00:00+02:00",
     "venueName": "Fórum Evolución Burgos",
     "city": "Burgos",
-    "category": "música",
+    "category": "Música",
     "price": "30€ – 38€",
     "status": "confirmed",
     "sources": [

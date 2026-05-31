@@ -26,3 +26,45 @@ export const CATEGORY_COLORS: Record<Category, string> = {
 export function getCategoryColor(category: string | null | undefined): string {
   return CATEGORY_COLORS[category as Category] ?? CATEGORY_COLORS["Otro"];
 }
+
+// Maps informal/legacy lowercase values to canonical categories
+const CATEGORY_ALIASES: Record<string, Category> = {
+  música: "Música",
+  musica: "Música",
+  music: "Música",
+  teatro: "Teatro y Danza",
+  danza: "Teatro y Danza",
+  dance: "Teatro y Danza",
+  cultural: "Cultural",
+  cultura: "Cultural",
+  exposición: "Cultural",
+  exposicion: "Cultural",
+  arte: "Cultural",
+  art: "Cultural",
+  literatura: "Cultural",
+  familiar: "Familiar",
+  infantil: "Familiar",
+  family: "Familiar",
+  deportes: "Deportes",
+  deporte: "Deportes",
+  sport: "Deportes",
+  sports: "Deportes",
+  gastronomía: "Gastronomía",
+  gastronomia: "Gastronomía",
+  food: "Gastronomía",
+  mercados: "Mercados y Ferias",
+  feria: "Mercados y Ferias",
+  market: "Mercados y Ferias",
+  otro: "Otro",
+  other: "Otro",
+  social: "Otro",
+};
+
+/** Normalize a free-text category string to a canonical Category, falling back to "Otro". */
+export function normalizeCategory(raw: string): Category {
+  const canonical = CATEGORIES.find(
+    (c) => c.toLowerCase() === raw.toLowerCase()
+  );
+  if (canonical) return canonical;
+  return CATEGORY_ALIASES[raw.toLowerCase()] ?? "Otro";
+}
