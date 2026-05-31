@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import "./globals.css";
 
@@ -33,9 +34,9 @@ export default function RootLayout({
       <body className="font-sans">
         <div className="mx-auto max-w-3xl px-4 py-8">
           <header className="mb-8">
-            <a href="/" aria-label="BurgosMola inicio">
+            <Link href="/" aria-label="BurgosMola inicio">
               <img src="/logo.svg" alt="BurgosMola" className="h-10 w-auto" />
-            </a>
+            </Link>
             <p className="mt-2 text-sm text-neutral-500">
               Guía de eventos en Burgos — conciertos, cultura, deporte y más.
             </p>

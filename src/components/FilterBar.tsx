@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 
 const DATE_CHIPS = [
@@ -62,12 +63,12 @@ export function FilterBar() {
           </button>
         ))}
         {hasFilters && (
-          <a
+          <Link
             href="/"
             className="ml-auto shrink-0 text-xs text-neutral-400 underline-offset-2 hover:underline dark:text-neutral-500"
           >
             Limpiar filtros
-          </a>
+          </Link>
         )}
       </div>
     </div>
