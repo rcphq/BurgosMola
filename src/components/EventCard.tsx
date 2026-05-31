@@ -1,5 +1,6 @@
 import type { EventRow } from "@/lib/db/schema";
 import { AddToCalendar } from "@/components/AddToCalendar";
+import { getCategoryColor } from "@/lib/categories";
 
 function formatTime(date: Date, timezone: string): string {
   return new Intl.DateTimeFormat("es-ES", {
@@ -19,7 +20,7 @@ export function EventCard({ event }: { event: EventRow }) {
           <div className="flex items-center gap-2 text-xs text-neutral-500">
             <span>{formatTime(event.startsAt, event.timezone)}</span>
             {event.category && (
-              <span className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">
+              <span className={`rounded px-1.5 py-0.5 ${getCategoryColor(event.category)}`}>
                 {event.category}
               </span>
             )}
