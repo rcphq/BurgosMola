@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { isDatabaseConfigured } from "@/lib/db";
 import { EventCard } from "@/components/EventCard";
-import { getUpcomingEvents, groupByDay } from "@/lib/events/queries";
+import { FilterBar } from "@/components/FilterBar";
+import { getUpcomingEvents, groupByDay, type EventFilters } from "@/lib/events/queries";
 
 // Always read fresh from the DB; events change as scrapers/ingest run.
 export const dynamic = "force-dynamic";
@@ -33,37 +35,67 @@ function SetupNotice({ detail }: { detail?: string }) {
   );
 }
 
-export default async function HomePage() {
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const sp = await searchParams;
+
   if (!isDatabaseConfigured()) {
-    return <SetupNotice />;
+    return (
+      <>
+        <Suspense><FilterBar /></Suspense>
+        <SetupNotice />
+      </>
+    );
   }
+
+  const filters: EventFilters = {
+    category: typeof sp.category === "string" ? sp.category : undefined,
+    date: typeof sp.date === "string"
+      ? (sp.date as EventFilters["date"])
+      : undefined,
+  };
 
   let days: [string, Awaited<ReturnType<typeof getUpcomingEvents>>][];
   try {
-    const events = await getUpcomingEvents();
+    const events = await getUpcomingEvents(200, filters);
     days = [...groupByDay(events).entries()];
   } catch (err) {
-    return <SetupNotice detail={err instanceof Error ? err.message : String(err)} />;
-  }
-
-  if (days.length === 0) {
-    return <SetupNotice />;
+    return (
+      <>
+        <Suspense><FilterBar /></Suspense>
+        <SetupNotice detail={err instanceof Error ? err.message : String(err)} />
+      </>
+    );
   }
 
   return (
-    <div className="space-y-8">
-      {days.map(([day, dayEvents]) => (
-        <section key={day}>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-            {formatDayHeading(day)}
-          </h2>
-          <div className="space-y-3">
-            {dayEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-        </section>
-      ))}
+    <div>
+      <Suspense><FilterBar /></Suspense>
+      {days.length === 0 ? (
+        <p className="text-sm text-neutral-500">
+          No hay eventos para los filtros seleccionados.
+        </p>
+      ) : (
+        <div className="space-y-8">
+          {days.map(([day, dayEvents]) => (
+            <section key={day}>
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+                {formatDayHeading(day)}
+              </h2>
+              <div className="space-y-3">
+                {dayEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
