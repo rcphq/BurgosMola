@@ -1,6 +1,7 @@
 import type { EventRow } from "@/lib/db/schema";
 import { AddToCalendar } from "@/components/AddToCalendar";
 import { getCategoryColor } from "@/lib/categories";
+import { ShareButtons } from "@/components/ShareButtons";
 
 function formatTime(date: Date, timezone: string): string {
   return new Intl.DateTimeFormat("es-ES", {
@@ -59,8 +60,14 @@ export function EventCard({ event }: { event: EventRow }) {
           )}
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
         <AddToCalendar event={event} />
+        {event.url && (
+          <ShareButtons
+            title={event.title}
+            url={event.url}
+          />
+        )}
       </div>
     </article>
   );

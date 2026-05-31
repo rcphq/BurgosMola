@@ -3,9 +3,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Burgos Event Hub",
-  description:
-    "A consolidated, de-duplicated guide to events in and around Burgos.",
+  title: "BurgosMola – Eventos en Burgos",
+  description: "Guía unificada de eventos en Burgos. Conciertos, cultura, deporte, gastronomía y mucho más.",
+  openGraph: {
+    title: "BurgosMola – Eventos en Burgos",
+    description: "Guía unificada de eventos en Burgos. Conciertos, cultura, deporte, gastronomía y mucho más.",
+    url: "https://burgosmola.es",
+    siteName: "BurgosMola",
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "BurgosMola – Eventos en Burgos",
+    description: "Guía unificada de eventos en Burgos.",
+  },
 };
 
 export default function RootLayout({
