@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Vieja Escuela (Teloneros XIII Aniversario El Pez)",
+    "description": "Teloneros del XIII Aniversario El Pez Gastrotiendas. Preparral San Lorenzo en las terrazas de El Pez y Encarnas.",
+    "startsAt": "2026-06-11T18:00:00+02:00",
+    "venueName": "Terrazas El Pez y Encarnas",
+    "address": "Calle San Lorenzo",
+    "city": "Burgos",
+    "category": "Música",
+    "tags": ["preparral", "san lorenzo", "aniversario el pez"],
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "instagram",
+        "url": "https://www.instagram.com/arrebol.band_/",
+        "uid": "arrebol-band-aniversario-elpez-2026"
+      }
+    ]
+  },
+  {
+    "title": "Arrebol – XIII Aniversario El Pez",
+    "description": "Concierto de Arrebol en el XIII Aniversario El Pez Gastrotiendas. Preparral San Lorenzo en las terrazas de El Pez y Encarnas. Teloneros: Vieja Escuela a las 18:00.",
+    "startsAt": "2026-06-11T21:00:00+02:00",
+    "venueName": "Terrazas El Pez y Encarnas",
+    "address": "Calle San Lorenzo",
+    "city": "Burgos",
+    "category": "Música",
+    "tags": ["preparral", "san lorenzo", "aniversario el pez"],
+    "status": "confirmed",
+    "sources": [
+      {
+        "name": "instagram",
+        "url": "https://www.instagram.com/arrebol.band_/",
+        "uid": "arrebol-band-aniversario-elpez-2026-main"
+      }
+    ]
+  }
+]
