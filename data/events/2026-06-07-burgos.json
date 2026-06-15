@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Perdido en los 80s",
+    "startsAt": "2026-06-07T19:00:00+02:00",
+    "venueName": "Cultural Caja de Burgos",
+    "city": "Burgos",
+    "category": "Teatro y Danza",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Victor Manuel. Sólo a solas conmigo",
+    "startsAt": "2026-06-07T20:00:00+02:00",
+    "venueName": "Auditorio Fórum Evolución Burgos",
+    "city": "Burgos",
+    "category": "Música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  }
+]

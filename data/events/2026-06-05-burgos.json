@@ -1,0 +1,81 @@
+[
+  {
+    "title": "Andrés Suárez. Lúa en acústico",
+    "startsAt": "2026-06-05T19:30:00+02:00",
+    "venueName": "Cultural Caja de Burgos",
+    "city": "Burgos",
+    "category": "Música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Noemí Domarco y Miguel Ángel Azofra",
+    "startsAt": "2026-06-05T19:30:00+02:00",
+    "venueName": "Salón de Actos Plaza Nueva Gamonal",
+    "city": "Burgos",
+    "category": "Música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Recital de violonchelo y piano",
+    "startsAt": "2026-06-05T20:15:00+02:00",
+    "venueName": "Auditorio elcírculo",
+    "city": "Burgos",
+    "category": "Música",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Prima voce: Juglar castellano",
+    "startsAt": "2026-06-05T20:30:00+02:00",
+    "venueName": "El Sótano Café Cultural",
+    "city": "Burgos",
+    "category": "Teatro y Danza",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Ballet Scherezade: Esencias",
+    "startsAt": "2026-06-05T20:30:00+02:00",
+    "venueName": "Teatro Principal",
+    "city": "Burgos",
+    "category": "Teatro y Danza",
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Teatracciones 17. Festival Nueva Escena de Espacio Tangente",
+    "startsAt": "2026-06-05T20:30:00+02:00",
+    "venueName": "Espacio Tangente",
+    "city": "Burgos",
+    "category": "Teatro y Danza",
+    "tags": ["festival"],
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  },
+  {
+    "title": "Así pasen 20 años",
+    "startsAt": "2026-06-05T22:00:00+02:00",
+    "venueName": "La Parrala",
+    "city": "Burgos",
+    "category": "Cultural",
+    "tags": ["cine", "documental"],
+    "status": "confirmed",
+    "sources": [
+      { "name": "website:agendaburgos", "url": "https://www.agendaburgos.com/" }
+    ]
+  }
+]
